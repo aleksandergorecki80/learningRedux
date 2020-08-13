@@ -16,7 +16,7 @@ const decrementCount = ({ decrementBy = 1} = {}) => {
 
 //set
 
-const setCount = ({ setTo = 102} = {}) => {
+const setCount = ({ setTo } ) => {    // value is required, no default value
   return {
     type: 'SET',
     setTo
@@ -31,7 +31,7 @@ const resetCount = () => {
   }
 }
 
-const store = createStore((state = { count: 0 }, action) => {
+const countReducer = (state = { count: 0 }, action) => {
   switch(action.type){
     case 'INCREMENT':
       return {
@@ -56,7 +56,9 @@ const store = createStore((state = { count: 0 }, action) => {
     default:
       return state;
   }
-});
+}
+
+const store = createStore(countReducer);
 
 
 
@@ -72,8 +74,7 @@ store.dispatch(incrementCount());
 store.dispatch(incrementCount( { incrementBy: 5 } ));
 store.dispatch(decrementCount( {decrementBy: 3} ));
 store.dispatch(decrementCount());
-store.dispatch(setCount());
-store.dispatch(setCount( {setTo: 1500 }));
+store.dispatch(setCount( {setTo: 102 }));
 store.dispatch(resetCount());
 
 
